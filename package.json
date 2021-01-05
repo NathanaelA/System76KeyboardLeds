@@ -1,0 +1,15 @@
+{
+  "description": "Bonobo/System76 Color changer",
+  "main": "index.js",
+  "dependencies": {
+    "node-hid": "latest"
+  },
+  "author": {
+    "email": "nathan@master-technology.com",
+    "name": "Nathanael Anderson"
+  },
+  "homepage": "https://github.com/NathanaelA/System76KeyboardLeds",
+  "bugs": {
+    "url": "https://github.com/NathanaelA/System76KeyboardLeds/issues"
+  }
+}
