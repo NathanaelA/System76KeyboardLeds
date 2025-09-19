@@ -9,14 +9,16 @@ So I wrote something based on how the system76 power driver handles the Keyboard
 You can do:
 `node index` *or* `node .` to activate the program.  It should give you a quick help screen.
 
-I personally created a quick bash script (`/usr/local/bin/kcolor`) that looks like this:
-  ```bash
-  #!/bin/bash
-  sudo /usr/local/bin/node <where the project is located>/index.js "$@"
-  ```
+Do to usb/hid devices being protected from most users to change anything you either need to "sudo" it or create some udev rules allowing everyone read/write access to the devices.
 
-The reason for `sudo` is that their as a "bug" in the power firmware where when the computer goes into a shallow sleep (or anything that effects the keyboard brightness); unfortunately when it wakes up it resets the brightness; but also the color is reset when the brightness is changed.   So using sudo allows the script to change the values of keyboard at the OS level so when it changes the keyboard, the color doesn't reset to whatever your last sudo'd color was.
-Issue Report: https://github.com/pop-os/system76-power/issues/202
+I personally created a udev rules so I don't need to run sudo.
+File: `/etc/udev/rules/50-keyboard.rules`
+
+Contents:
+```
+KERNEL=="usb", ATTRS{idVendor}=="048d", MODE="0666"
+KERNEL=="hidraw*", ATTRS{idVendor}=="048d", MODE="0666"
+```
 
 ## CLI samples:
 - node . 00FF00  (or kcolor 00FF00)  
